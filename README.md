@@ -45,7 +45,6 @@ Feel free to open an issue or submit a pull request.
 
 📬 Contact
 Telegram: @lesin_official
-Email: dmitrylesin_official@gmail.com
 
 ---
 
