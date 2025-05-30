@@ -1,5 +1,8 @@
 # 🏠 Housing Prices Analysis & Prediction
 
+📥 **You can download the dataset from Kaggle:**  
+[🔗 Housing Price Data](https://www.kaggle.com/competitions/home-data-for-ml-course)
+
 This project focuses on analyzing and predicting housing prices using real estate data. We perform data preprocessing, feature engineering, and apply machine learning models — primarily Gradient Boosting — to estimate property prices.
 
 ---
