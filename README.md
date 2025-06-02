@@ -8,9 +8,13 @@ This is where I explore real-world datasets, apply various data analysis techniq
 ## 🗂 Repository Structure
 
 Each analysis is organized in a single folder, containing:
+
 📁 dataset_folder/
+
 📄 README.md # Detailed explanation of the analysis
+
 📄 data.csv # The dataset
+
 📄 main.py # Full Python script with code
 
 
