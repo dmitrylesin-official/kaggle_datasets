@@ -19,13 +19,15 @@ The dataset is loaded from a CSV file named `advertising.csv`, which includes:
 
 ## 🧹 Data Preprocessing
 
-```df = pd.read_csv('/content/advertising.csv')```
+```python
+df = pd.read_csv('/content/advertising.csv')
+```
 
 • We read the dataset using pandas and explored the basic statistics (.info() and .head()).
 
 • The target variable Sales was separated from the features.
 
-```
+```python
 X = df.drop('Sales', axis=1)
 y = df['Sales']
 ```
@@ -36,7 +38,7 @@ y = df['Sales']
 
 We applied Polynomial Feature Expansion (degree=2) to model complex nonlinear interactions between the features:
 
-```
+```python
 from sklearn.preprocessing import PolynomialFeatures
 poly = PolynomialFeatures(degree=2, include_bias=False)
 X_poly = poly.fit_transform(X)
@@ -50,7 +52,7 @@ We used GradientBoostingRegressor from sklearn.ensemble, a powerful ensemble met
 
 Hyperparameters were tuned using GridSearchCV for optimal performance:
 
-```
+```python
 params = [{
     'n_estimators': [30, 50, 70],
     'max_depth': [3, 5, 7],
@@ -62,7 +64,7 @@ params = [{
 
 • Evaluation metrics: Mean Squared Error (MSE) and Mean Absolute Error (MAE)
 
-```
+```python
 print(f'MSE: {mean_squared_error(y_test, y_pred)}') ≈ 0.980
 print(f'MAE: {mean_absolute_error(y_test, y_pred)}') ≈ 0.672
 ```
