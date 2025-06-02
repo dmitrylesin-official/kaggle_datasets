@@ -24,14 +24,14 @@ The dataset is loaded from a CSV file named **Housing.csv**, which contains vari
 ---
 
 ## 🧹 Data Preprocessing
-```
+```python
 df = pd.read_csv('/content/Housing.csv')
 df = df.drop('furnishingstatus', axis=1)
 ```
 • Dropped furnishingstatus: This feature was removed because it did not significantly impact the model's predictive performance.
 
 • Binary encoding: Converted categorical "yes/no" columns into boolean True/False for compatibility with ML algorithms.
-```
+```python
 cols = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea']
 df[cols] = df[cols].replace({'yes': True, 'no': False})
 ```
@@ -39,7 +39,7 @@ df[cols] = df[cols].replace({'yes': True, 'no': False})
 ##🏐 Feature Engineering
 
 A new feature total_rooms was created by summing bedrooms and bathrooms to better capture the overall size of the property:
-```
+```python
 df['total_rooms'] = df['bedrooms'] + df['bathrooms']
 ```
 
@@ -48,7 +48,7 @@ df['total_rooms'] = df['bedrooms'] + df['bathrooms']
 ## 📊 Data Visualization
 
 Basic histograms and correlation matrix were used to understand the distributions and relationships between features:
-```
+```python
 df.hist(figsize=(12, 10), bins=30)
 sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
 ```
@@ -58,7 +58,7 @@ sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
 ## 🧐 Model Building & Evaluation
 
 We used GradientBoostingRegressor from sklearn.ensemble, with hyperparameter tuning via GridSearchCV.
-```
+```python
 params = [{
     'n_estimators': [30, 50, 70],
     'max_depth': [3, 5, 7],
@@ -68,7 +68,7 @@ params = [{
 • Data split: 80% training / 20% testing
 
 • Evaluation metric: R² Score (coefficient of determination)
-```
+```python
 print(f'R2: {r2_score(y_test, y_pred)}')
 ```
 
