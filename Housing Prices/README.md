@@ -47,9 +47,28 @@ df['total_rooms'] = df['bedrooms'] + df['bathrooms']
 
 ## 📊 Data Visualization
 
-Basic histograms and correlation matrix were used to understand the distributions and relationships between features:
+### Histogram with Outlier Thresholds
+To detect and eliminate outliers, we visualized the distribution of housing prices with vertical lines marking the 95th and 99th percentiles:
 ```python
-df.hist(figsize=(12, 10), bins=30)
+plt.subplots(figsize=(10, 7))
+sns.histplot(df['price'], label='Price')
+plt.axvline(df['price'].quantile(0.95), label='0.95%', c='green')
+plt.axvline(df['price'].quantile(0.99), label='0.99%', c='red')
+plt.legend()
+plt.title('Price Distribution with Outlier Thresholds')
+plt.xlabel('Price')
+plt.ylabel('Frequency')
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/2ecb4377-a7d8-4d5e-9a99-2be763353168)
+
+Values above the 99th percentile were considered outliers and removed to prevent skewing the model:
+```python
+df = df[df['price'] <= df['price'].quantile(0.99)]
+```
+### Correlation Matrix
+A heatmap was used to show correlation between numerical features:
+```python
 sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
 ```
 
