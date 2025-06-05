@@ -24,6 +24,20 @@ df = df.drop('furnishingstatus', axis=1)
 cols = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea']
 df[cols] = df[cols].replace({'yes': True, 'no': False})
 
+# 📊 Visualize price distribution and cut off outliers
+plt.subplots(figsize=(10, 7))
+sns.histplot(df['price'], label='Price')
+plt.axvline(df['price'].quantile(0.95), label='0.95%', c='green')
+plt.axvline(df['price'].quantile(0.99), label='0.99%', c='red')
+plt.legend()
+plt.title('Price Distribution with Outlier Thresholds')
+plt.xlabel('Price')
+plt.ylabel('Frequency')
+plt.show()
+
+# 🧹 Remove outliers above 99th percentile
+df = df[df['price'] <= df['price'].quantile(0.99)]
+
 # 🧮 Create a new feature combining bedrooms and bathrooms
 df['total_rooms'] = df['bedrooms'] + df['bathrooms']
 
