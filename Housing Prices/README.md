@@ -95,7 +95,7 @@ print(f'R2: {r2_score(y_test, y_pred)}')
 
 ## 📈 Final Result
 
-The model achieved an average R² score of ~0.62 on the test set, indicating a moderately strong relationship between the features and housing prices.
+The model achieved an average R² score of ~0.67 on the test set, indicating a moderately strong relationship between the features and housing prices.
 
 ---
 
