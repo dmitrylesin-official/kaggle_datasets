@@ -27,10 +27,34 @@ df = pd.read_csv('/content/advertising.csv')
 
 • The target variable Sales was separated from the features.
 
+
 ```python
 X = df.drop('Sales', axis=1)
 y = df['Sales']
 ```
+
+---
+
+## 📊 Data Exploration: Histograms
+To better understand the distribution of the advertising budgets and the sales values, histograms were plotted for each feature:
+
+• Histograms help visualize the frequency distribution of each variable.
+
+• They reveal important characteristics such as skewness, range, and the presence of outliers.
+
+• This initial exploration guides us in preprocessing decisions and feature engineering.
+```python
+df.hist();
+```
+From the histograms, we can observe:
+
+• The TV and Radio budgets show roughly normal distributions with some variation.
+
+• Newspaper budgets tend to be skewed with many low values and a few high spenders.
+
+• Sales data is approximately normally distributed, indicating consistent sales behavior with some variation.
+
+These insights help justify applying polynomial features to model nonlinear relationships between advertising spend and sales.
 
 ---
 
