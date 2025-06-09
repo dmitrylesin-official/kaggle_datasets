@@ -46,6 +46,8 @@ To better understand the distribution of the advertising budgets and the sales v
 ```python
 df.hist();
 ```
+![image](https://github.com/user-attachments/assets/f94a64d7-858b-4e1d-aba7-b5d1602d525e)
+
 From the histograms, we can observe:
 
 • The TV and Radio budgets show roughly normal distributions with some variation.
