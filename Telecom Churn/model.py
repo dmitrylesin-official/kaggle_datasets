@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load dataset
-df = pd.read_csv('/content/churn-bigml-20.csv')
+df = pd.read_csv('churn-bigml-20.csv')
 
 # Preview the first few rows
 df.head()
