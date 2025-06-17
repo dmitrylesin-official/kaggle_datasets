@@ -115,7 +115,7 @@ The model achieved an average R² score of ~0.67 on the test set, indicating a m
 
 ## 📬 Author
 
-Telegram: @lesin_official
+Telegram: @dmitrylesin
 
 Email: dmitrylesin_official@gmail.com
 
