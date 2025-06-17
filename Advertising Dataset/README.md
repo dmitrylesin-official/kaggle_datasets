@@ -1,7 +1,7 @@
 # 📈 Advertising Sales Prediction
 
 📥 You can download the dataset from Kaggle:  
-🔗 [Advertising Dataset](https://www.kagglehttps://www.kaggle.com/datasets/ashydv/advertising-dataset)
+🔗 [Advertising Dataset](https://www.kaggle.com/datasets/ashydv/advertising-dataset)
 
 This project aims to analyze and predict advertising-driven product sales using classical machine learning techniques. We utilize polynomial feature expansion and Gradient Boosting to improve prediction accuracy.
 
@@ -60,46 +60,69 @@ These insights help justify applying polynomial features to model nonlinear rela
 
 ---
 
-## 🏐 Feature Engineering
+## Machine Learning Pipeline
 
-We applied Polynomial Feature Expansion (degree=2) to model complex nonlinear interactions between the features:
+We use a pipeline to chain together:
+
+1. PolynomialFeatures (degree=2) — expands features with squared and interaction terms
+
+2. GradientBoostingRegressor — for prediction
 
 ```python
-from sklearn.preprocessing import PolynomialFeatures
-poly = PolynomialFeatures(degree=2, include_bias=False)
-X_poly = poly.fit_transform(X)
+pipe = Pipeline([
+    ('poly', PolynomialFeatures(degree=2, include_bias=False)),
+    ('model', GradientBoostingRegressor(random_state=42))
+])
 ```
 
 ---
 
-## 🧐 Model Building & Evaluation
+## 🎯 Hyperparameter Tuning with GridSearchCV
 
-We used GradientBoostingRegressor from sklearn.ensemble, a powerful ensemble method for regression problems.
-
-Hyperparameters were tuned using GridSearchCV for optimal performance:
+To find the best model configuration, we apply GridSearchCV with 5-fold cross-validation:
 
 ```python
-params = [{
-    'n_estimators': [30, 50, 70],
-    'max_depth': [3, 5, 7],
-    'min_samples_split': [2, 4]
-}]
+param_grid = {
+    'model__n_estimators': [30, 50, 70],
+    'model__max_depth': [3, 5, 7],
+    'model__min_samples_split': [2, 4]
+}
+
+grid_search = GridSearchCV(
+    estimator=pipe,
+    param_grid=param_grid,
+    cv=5,
+    scoring='r2'
+)
 ```
 
 • Data split: 80% for training, 20% for testing
 
 • Evaluation metrics: Mean Squared Error (MSE) and Mean Absolute Error (MAE)
 
-```python
-print(f'MSE: {mean_squared_error(y_test, y_pred)}') ≈ 0.980
-print(f'MAE: {mean_absolute_error(y_test, y_pred)}') ≈ 0.672
-```
-
 ---
 
 ## 📈 Final Result
 
-The model was able to capture nonlinear trends in advertising effectiveness and produced a solid prediction quality based on MSE and MAE metrics. Grid search also showed optimal hyperparameters for boosting accuracy.
+After fitting the pipeline:
+```python
+grid_search.fit(X_train, y_train)
+y_pred = grid_search.predict(X_test)
+```
+We evaluate the model using standard regression metrics:
+```python
+print('Best params:', grid_search.best_params_)
+print('Best R2 (CV):', grid_search.best_score_)
+print(f'MSE: {mean_squared_error(y_test, y_pred)}')
+print(f'MAE: {mean_absolute_error(y_test, y_pred)}')
+```
+📌 Output Example (may vary based on run):
+```yaml
+Best params: {'model__max_depth': 3, 'model__min_samples_split': 2, 'model__n_estimators': 70}
+Best R2 (CV): 0.974
+MSE: 1.05
+MAE: 0.67
+```
 
 ---
 
@@ -121,7 +144,7 @@ The model was able to capture nonlinear trends in advertising effectiveness and 
 
 ## 📬 Author
 
-**Telegram:** @lesin_official
+**Telegram:** @dmitrylesin
 
 **Email:** dmitrylesin_official@gmail.com
 
