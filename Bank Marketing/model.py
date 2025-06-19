@@ -1,0 +1,63 @@
+import pandas as pd
+import numpy as np
+from collections import Counter
+
+from catboost import Pool, CatBoostClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+df = pd.read_csv('/content/bank-additional-full.csv', sep=';')
+
+df.head()
+df.info()
+df.isnull().sum()
+
+# Key: convert selected binary categorical columns to numeric
+cols_to_encode = ['loan', 'housing']
+for col in cols_to_encode:
+    df[col] = df[col].map({'no': 0, 'yes': 1, 'unknown': 'unknown'})
+
+# Key: convert target to boolean
+df['y'] = df['y'].replace({'yes': True, 'no': False})
+
+# Drop non-informative column
+df = df.drop(columns='default')
+
+X = df.drop(columns='y')
+y = df['y']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Key: identify categorical features for CatBoost
+object_columns = df.select_dtypes(include='object').columns.tolist()
+train_pool = Pool(data=X_train, label=y_train, cat_features=object_columns)
+test_pool = Pool(data=X_test, label=y_test, cat_features=object_columns)
+
+# Key: handle class imbalance using class weights
+counts = Counter(y_train)
+total = sum(counts.values())
+class_weights = {
+    0: total / (2 * counts[0]),
+    1: total / (2 * counts[1]),
+}
+
+# Key: CatBoostClassifier with Recall optimization
+model = CatBoostClassifier(
+    iterations=1000,
+    learning_rate=0.1,
+    depth=8,
+    eval_metric='Recall',
+    random_state=42,
+    verbose=100,
+    class_weights=class_weights
+)
+
+# Train the model with early stopping
+model.fit(train_pool, eval_set=test_pool, early_stopping_rounds=50)
+
+# Predictions
+y_pred = model.predict(test_pool)
+y_pred_proba = model.predict_proba(test_pool)[:, 1]
+
+# Evaluation (Recall is the focus)
+print("Recall:", recall_score(y_test, y_pred))
