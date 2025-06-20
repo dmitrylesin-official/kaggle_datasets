@@ -99,6 +99,28 @@ The model performs exceptionally well on the test set, indicating good predictiv
 
 ---
 
+## 📋 Logging System
+This project includes a lightweight logging system to track key pipeline steps and improve observability.
+
+Key logged events include:
+
+• Dataset load success and shape
+
+• Model training and evaluation results
+
+Logs are automatically written to **log.txt** with timestamps and severity levels (**INFO**, **WARNING**, **ERROR**) using Python’s built-in **logging** module:
+```python
+logging.basicConfig(
+    level=logging.INFO,
+    filename='log.txt',
+    filemode='a',
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+```
+This enables faster debugging and provides traceability in case of errors or unexpected results.
+
+---
+
 ## 📬 Author
 Telegram: @dmitrylesin
 
