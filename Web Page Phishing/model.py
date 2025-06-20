@@ -25,7 +25,7 @@ logging.basicConfig(
 logging.info('Dataset loaded successfully')
 
 # Load dataset
-df = pd.read_csv('/content/web-page-phishing.csv')
+df = pd.read_csv('web-page-phishing.csv')
 
 # Inspect structure and missing values
 df.info()
