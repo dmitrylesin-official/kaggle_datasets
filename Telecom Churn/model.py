@@ -3,16 +3,21 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load dataset
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename='log.txt',
+    filemode='a',
+    format='%(asctime)s - %(levelname) - %(message)s'
+)
+
+logging.info('Dataset loaded successfully. Rows: %d, Columns: %d', df.shape[0], df.shape[1])
 df = pd.read_csv('churn-bigml-20.csv')
 
-# Preview the first few rows
+
 df.head()
-
-# View data structure and types
 df.info()
-
-# Check for missing values
 df.isnull().sum()
 
 # Drop the 'State' column (not useful for modeling)
@@ -61,10 +66,10 @@ y = df['Churn']
 # selector = SelectKBest(score_func=f_classif, k=10)
 # X_new = selector.fit_transform(X, y)
 
-# Train-test split (80/20)
+logging.info('Split into train and test. Train size: %d, Test size: %d', len(X_train), len(X_test))
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Initialize and train the Random Forest model
+logging.info('Training model: RandomForestClassifier(max_depth=15, n_estimators=100)')
 model = RandomForestClassifier(max_depth=15, n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
@@ -74,6 +79,7 @@ y_pred = model.predict(X_test)
 # Evaluate model performance
 print(f'Accuracy: {accuracy_score(y_test, y_pred):.4f}')
 print(f'F1 Score: {f1_score(y_test, y_pred):.4f}')
+logging.info(f'Model evaluation complete. Accuracy: {accuracy:.4f}, F1: {f1:.4f}')
 
 # Optional: Hyperparameter tuning with GridSearchCV (worse results in this case)
 # param_grid = {
