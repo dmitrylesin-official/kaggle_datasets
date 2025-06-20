@@ -23,10 +23,22 @@ The dataset is loaded from a CSV file named **Housing.csv**, which contains vari
 
 ---
 
-## 🧹 Data Preprocessing
+## 🧹 Data Preprocessing & Logging
 ```python
-df = pd.read_csv('/content/Housing.csv')
-df = df.drop('furnishingstatus', axis=1)
+import logging
+logging.basicConfig(
+    level=logging.INFO,
+    filename='log.txt',
+    filemode='a',
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+try:
+    df = pd.read_csv('Housing.csv')
+    logging.info('Dataset loaded successfully')
+except Exception as e:
+    logging.error('Failed to load dataset: %s', str(e))
+
 ```
 • Dropped furnishingstatus: This feature was removed because it did not significantly impact the model's predictive performance.
 
@@ -38,9 +50,13 @@ df[cols] = df[cols].replace({'yes': True, 'no': False})
 
 ##🏐 Feature Engineering
 
-A new feature total_rooms was created by summing bedrooms and bathrooms to better capture the overall size of the property:
+Created a new feature to better represent total space:
 ```python
 df['total_rooms'] = df['bedrooms'] + df['bathrooms']
+```
+Also, outliers above the 99th percentile in price were removed:
+```python
+df = df[df['price'] <= df['price'].quantile(0.99)]
 ```
 
 ---
@@ -76,7 +92,7 @@ sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
 
 ## 🧐 Model Building & Evaluation
 
-We used GradientBoostingRegressor from sklearn.ensemble, with hyperparameter tuning via GridSearchCV.
+We use GradientBoostingRegressor and GridSearchCV for tuning:
 ```python
 params = [{
     'n_estimators': [30, 50, 70],
@@ -84,11 +100,19 @@ params = [{
     'min_samples_leaf': [2, 5]
 }]
 ```
-• Data split: 80% training / 20% testing
+• 80/20 train/test split
 
-• Evaluation metric: R² Score (coefficient of determination)
+• Scoring metric: R² score
 ```python
-print(f'R2: {r2_score(y_test, y_pred)}')
+from sklearn.metrics import r2_score
+y_pred = best_model.predict(X_test)
+print(f'R² Score on test set: {r2_score(y_test, y_pred)}')
+```
+Logging is integrated throughout model training:
+```python
+logging.info("Starting GridSearchCV with parameters: %s", params)
+...
+logging.info("Test set R² score: %.4f", final_r2)
 ```
 
 ---
@@ -108,6 +132,8 @@ The model achieved an average R² score of ~0.67 on the test set, indicating a m
 • Matplotlib, Seaborn for visualization
 
 • Scikit-learn (sklearn) for model training and evaluation
+
+• Logging — tracking data load, training, errors
 
 • Google Colab as the development environment
 
