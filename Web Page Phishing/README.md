@@ -85,6 +85,33 @@ A simple XGBoost classifier with log-loss objective and weight adjustment for sk
 
 ---
 
+## 📉 CatBoost Learning Curve Visualization
+In addition to the main XGBoost pipeline, you can use the following code snippet to analyze the training process of a CatBoost model:
+```
+results = model.get_evals_result()
+
+plt.figure(figsize=(10, 6))
+plt.plot(results['learn']['Logloss'], label='Train')
+plt.plot(results['validation']['Logloss'], label='Validation')
+plt.xlabel('Iteration')
+plt.ylabel('Logloss')
+plt.title('CatBoost Learning Curve')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/81f216d3-818d-425c-96a4-e86c340d658c)
+
+What this code does:
+
+• model.get_evals_result() returns a dictionary with metric values recorded at each training iteration.
+
+• The plot shows Logloss curves over iterations for both training and validation datasets.
+
+• This visualization helps to see if the model is overfitting, underfitting, or training properly.
+
+• Useful for deciding the number of iterations, applying early stopping, and tuning hyperparameters.
+
 ## 📈 Model Evaluation
 ```python
 y_pred = model.predict(X_test)
