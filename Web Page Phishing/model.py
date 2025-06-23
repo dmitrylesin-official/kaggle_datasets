@@ -63,6 +63,18 @@ model = XGBClassifier(
 )
 model.fit(X_train, y_train)
 
+results = model.get_evals_result()
+
+plt.figure(figsize=(10, 6))
+plt.plot(results['learn']['Logloss'], label='Train')
+plt.plot(results['validation']['Logloss'], label='Validation')
+plt.xlabel('Iteration')
+plt.ylabel('Logloss')
+plt.title('CatBoost Learning Curve')
+plt.legend()
+plt.grid(True)
+plt.show()
+
 # Make predictions
 y_pred = model.predict(X_test)
 
