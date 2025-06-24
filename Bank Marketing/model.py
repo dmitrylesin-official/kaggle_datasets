@@ -6,6 +6,16 @@ from catboost import Pool, CatBoostClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_score, recall_score, f1_score
 
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename='log.txt',
+    filemode='a',
+    format='%(astime)s - %(levelname)s - %(message)s'
+)
+
+logging.info('Dataset loaded successfully. Rows: %d, Columns: %d', df.shape[0], df.shape[1])
 df = pd.read_csv('/content/bank-additional-full.csv', sep=';')
 
 df.head()
@@ -26,6 +36,7 @@ df = df.drop(columns='default')
 X = df.drop(columns='y')
 y = df['y']
 
+logging.info('Split into train and test. Train size: %d, Test size: %d', len(X_train), len(X_test))
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Key: identify categorical features for CatBoost
@@ -41,7 +52,7 @@ class_weights = {
     1: total / (2 * counts[1]),
 }
 
-# Key: CatBoostClassifier with Recall optimization
+logging.info('Training model: CatBoostClassifier')
 model = CatBoostClassifier(
     iterations=1000,
     learning_rate=0.1,
@@ -61,3 +72,4 @@ y_pred_proba = model.predict_proba(test_pool)[:, 1]
 
 # Evaluation (Recall is the focus)
 print("Recall:", recall_score(y_test, y_pred))
+logging.info(f'Model evaluation complete. Recall: {recall:.4f}')
