@@ -15,7 +15,6 @@ logging.basicConfig(
 logging.info('Dataset loaded successfully. Rows: %d, Columns: %d', df.shape[0], df.shape[1])
 df = pd.read_csv('churn-bigml-20.csv')
 
-
 df.head()
 df.info()
 df.isnull().sum()
