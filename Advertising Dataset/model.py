@@ -6,14 +6,23 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 
-# Load the dataset
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename='log.txt',
+    filemode='a',
+    format='%(astime)s - %(levelname)s - %(message)s'
+)
+
+logging.info('Dataset loaded successfully.')
 df = pd.read_csv('advertising.csv')
 
 # Separate features and target variable
 X = df.drop('Sales', axis=1)
 y = df['Sales']
 
-# Split the data into training and test sets (80% train / 20% test)
+logging.info('Split into train and test. Train size: %d, Test size: %d', len(X_train), len(X_test))
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
