@@ -1,3 +1,10 @@
+# 📦 Installing libraries (if not already installed)
+# For local Python environment:
+# pip install pandas numpy catboost scikit-learn
+
+# For Google Colab, add "!" at the beginning of each command:
+# !pip install pandas numpy catboost scikit-learn
+
 import pandas as pd
 import numpy as np
 from collections import Counter
