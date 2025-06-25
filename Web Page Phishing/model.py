@@ -1,3 +1,10 @@
+# Installing required libraries (if not installed yet)
+# For local Python environment:
+# pip install pandas numpy scikit-learn xgboost matplotlib seaborn
+
+# For Google Colab, add "!" before each command:
+# !pip install pandas numpy scikit-learn xgboost matplotlib seaborn
+
 import pandas as pd
 import numpy as np
 
