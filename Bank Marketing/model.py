@@ -1,4 +1,4 @@
-# 📦 Installing libraries (if not already installed)
+# Installing libraries (if not already installed)
 # For local Python environment:
 # pip install pandas numpy catboost scikit-learn
 
