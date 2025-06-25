@@ -1,3 +1,10 @@
+# Installing required libraries (if not installed yet)
+# For local Python environment:
+# pip install pandas scikit-learn matplotlib seaborn
+
+# For Google Colab, add "!" at the beginning of each command:
+# !pip install pandas scikit-learn matplotlib seaborn
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
