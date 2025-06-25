@@ -1,3 +1,10 @@
+# Installing required libraries (if not installed yet)
+# For local environment (desktop Python):
+# pip install pandas scikit-learn
+
+# For Google Colab, add "!" before each command:
+# !pip install pandas scikit-learn
+
 import pandas as pd
 
 from sklearn.model_selection import train_test_split, GridSearchCV
