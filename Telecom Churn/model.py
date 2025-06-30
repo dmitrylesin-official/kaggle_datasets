@@ -20,7 +20,7 @@ logging.basicConfig(
 )
 
 logging.info('Dataset loaded successfully. Rows: %d, Columns: %d', df.shape[0], df.shape[1])
-df = pd.read_csv('churn-bigml-20.csv')
+df = pd.read_csv('churn-bigml-20.csv', encoding='utf-8')
 
 df.head()
 df.info()
