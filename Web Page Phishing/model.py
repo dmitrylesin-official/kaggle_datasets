@@ -28,11 +28,9 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# Log dataset load
+# dataset load
 logging.info('Dataset loaded successfully')
-
-# Load dataset
-df = pd.read_csv('web-page-phishing.csv')
+df = pd.read_csv('web-page-phishing.csv', encoding='utf-8')
 
 # Inspect structure and missing values
 df.info()
