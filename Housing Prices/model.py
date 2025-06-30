@@ -23,7 +23,7 @@ logging.basicConfig(
 )
 
 try:
-    df = pd.read_csv('Housing.csv')
+    df = pd.read_csv('Housing.csv', encoding='utf-8')
     logging.info('Dataset loaded successfully')
 except Exception as e:
     logging.error('Failed to load dataset: %s', str(e)
