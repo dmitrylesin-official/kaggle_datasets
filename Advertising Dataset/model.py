@@ -23,7 +23,7 @@ logging.basicConfig(
 )
 
 logging.info('Dataset loaded successfully.')
-df = pd.read_csv('advertising.csv')
+df = pd.read_csv('advertising.csv', encoding='utf-8')
 
 # Separate features and target variable
 X = df.drop('Sales', axis=1)
