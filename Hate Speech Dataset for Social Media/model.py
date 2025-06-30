@@ -20,7 +20,7 @@ logging.basicConfig(
 )
 
 logging.info('Dataset loaded successfully.')
-df = pd.read_csv('hate_speech_1829.csv')
+df = pd.read_csv('hate_speech_1829.csv', encoding='utf-8')
 
 df.head()
 df.info()
