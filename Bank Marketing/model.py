@@ -44,7 +44,7 @@ X = df.drop(columns='y')
 y = df['y']
 
 logging.info('Split into train and test. Train size: %d, Test size: %d', len(X_train), len(X_test))
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
 # Key: identify categorical features for CatBoost
 object_columns = df.select_dtypes(include='object').columns.tolist()
