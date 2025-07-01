@@ -68,7 +68,7 @@ SelectKBest(score_func=f_classif, k=10)
 ```
 A basic train_test_split was used:
 ```python
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 ```
 We also tested GridSearchCV for hyperparameter tuning:
 ```python
