@@ -53,3 +53,60 @@ score = silhouette_score(X_scaled, df_encoded['Cluster'])
 print(f'Silhouette_score: {score:.3f}')
 ```
 
+---
+
+## 📊 Data Visualization
+Elbow Method
+A line plot showing how inertia (within-cluster variance) decreases with increasing k. Used to roughly estimate a good cluster range.
+```python
+plt.plot(K_range, inertia, 'bo-')
+plt.title('Elbow Method')
+```
+![image](https://github.com/user-attachments/assets/87de367c-dc37-453f-b786-00dfa6e1f0ed)
+
+---
+
+## 📈 Cluster Profiling
+After assigning customers to clusters, we calculated the mean values of features per cluster to interpret them:
+```python
+df_encoded.groupby('Cluster').mean()
+```
+This table helps in building customer personas, e.g.:
+• Cluster 3 = Young, low income, low spending
+
+• Cluster 6 = Middle-aged, high income, very high spending
+
+• Cluster 9 = Older, moderate income, disengaged
+
+These insights can inform:
+• Personalized promotions
+
+• Loyalty programs
+
+• Offline marketing strategy
+
+• Inventory planning
+
+---
+
+## 🧰 Technologies Used
+• Python 3
+
+• Pandas, NumPy for data processing
+
+• Matplotlib for visualization
+
+• Scikit-learn (KMeans, preprocessing, silhouette score)
+
+• Logging for experiment tracking
+
+• Google Colab / Jupyter Notebook
+
+---
+
+## 📬 Author
+Telegram: @dmitrylesin
+
+Email: dmitrylesin_official@gmail.com
+
+© 2025 Dmitry Lesin. All rights reserved.
