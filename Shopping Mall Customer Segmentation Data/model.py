@@ -17,7 +17,7 @@ logging.basicConfig(
 
 # Load dataset
 try:
-    df = pd.read_csv('/content/Shopping Mall Customer Segmentation Data .csv', encoding='utf-8')
+    df = pd.read_csv('Shopping Mall Customer Segmentation Data .csv', encoding='utf-8')
     logging.info(f'Dataset successfully loaded. Shape: {df.shape}')
 except Exception as e:
     logging.error(f'Error loading dataset: {e}')
