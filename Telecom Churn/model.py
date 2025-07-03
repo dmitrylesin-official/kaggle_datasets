@@ -25,6 +25,7 @@ df = pd.read_csv('churn-bigml-20.csv', encoding='utf-8')
 df.head()
 df.info()
 df.isnull().sum()
+df.duplicated().sum()
 
 # Drop the 'State' column (not useful for modeling)
 df = df.drop('State', axis=1)
