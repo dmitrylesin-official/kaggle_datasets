@@ -25,6 +25,11 @@ logging.basicConfig(
 logging.info('Dataset loaded successfully.')
 df = pd.read_csv('advertising.csv', encoding='utf-8')
 
+df.head()
+df.info()
+df.isnull().sum()
+df.duplicated().sum()
+
 # Separate features and target variable
 X = df.drop('Sales', axis=1)
 y = df['Sales']
