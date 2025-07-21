@@ -64,6 +64,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
+from sklearn.dummy import DummyClassifier
 
 # Split features and target
 X = df.drop('Churn', axis=1)
@@ -87,6 +88,11 @@ y_pred = model.predict(X_test)
 print(f'Accuracy: {accuracy_score(y_test, y_pred):.4f}')
 print(f'F1 Score: {f1_score(y_test, y_pred):.4f}')
 logging.info(f'Model evaluation complete. Accuracy: {accuracy:.4f}, F1: {f1:.4f}')
+
+dummy = DummyClassifier(strategy='stratified')
+dummy.fit(X_train, y_train)
+dummy_pred = dummy.predict(X_test)
+print(f'Recall: {recall_score(y_test, dummy_pred):.8f}')
 
 # Optional: Hyperparameter tuning with GridSearchCV (worse results in this case)
 # param_grid = {
