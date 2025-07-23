@@ -35,7 +35,6 @@ df.hist(figsize=(14, 10))
 plt.tight_layout()
 plt.show()
 
-# Convert 'Yes'/'No' columns to boolean (True/False)
 df['International plan'] = df['International plan'].map({'Yes': True, 'No': False})
 df['Voice mail plan'] = df['Voice mail plan'].map({'Yes': True, 'No': False})
 
@@ -81,18 +80,17 @@ logging.info('Training model: RandomForestClassifier(max_depth=15, n_estimators=
 model = RandomForestClassifier(max_depth=15, n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# Make predictions on the test set
 y_pred = model.predict(X_test)
 
 # Evaluate model performance
-print(f'Accuracy: {accuracy_score(y_test, y_pred):.4f}')
-print(f'F1 Score: {f1_score(y_test, y_pred):.4f}')
-logging.info(f'Model evaluation complete. Accuracy: {accuracy:.4f}, F1: {f1:.4f}')
+print(f'Accuracy: {accuracy_score(y_test, y_pred):.2f}')
+print(f'F1 Score: {f1_score(y_test, y_pred):.2f}')
+logging.info(f'Model evaluation complete. Accuracy: {accuracy:.2f}, F1: {f1:.2f}')
 
 dummy = DummyClassifier(strategy='stratified')
 dummy.fit(X_train, y_train)
 dummy_pred = dummy.predict(X_test)
-print(f'Recall: {recall_score(y_test, dummy_pred):.8f}')
+print(f'Recall: {recall_score(y_test, dummy_pred):.2f}')
 
 # Optional: Hyperparameter tuning with GridSearchCV (worse results in this case)
 # param_grid = {
