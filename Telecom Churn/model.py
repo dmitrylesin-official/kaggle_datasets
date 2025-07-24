@@ -82,6 +82,10 @@ model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
 
+cm = confusion_matrix(y_test, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+disp.plot()
+
 # Evaluate model performance
 print(f'Accuracy: {accuracy_score(y_test, y_pred):.2f}')
 print(f'F1 Score: {f1_score(y_test, y_pred):.2f}')
