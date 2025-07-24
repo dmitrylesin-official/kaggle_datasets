@@ -63,6 +63,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.pipeline import Pipeline
 from sklearn.dummy import DummyClassifier
 
 # Split features and target
@@ -76,11 +77,13 @@ y = df['Churn']
 logging.info('Split into train and test. Train size: %d, Test size: %d', len(X_train), len(X_test))
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
-logging.info('Training model: RandomForestClassifier(max_depth=15, n_estimators=100)')
 model = RandomForestClassifier(max_depth=15, n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
+pipeline_model = Pipeline([
+    ('model', RandomForestClassifier(max_depth=15, n_estimators=100, random_state=42))
+])
+pipeline_model.fit(X_train, y_train)
 
-y_pred = model.predict(X_test)
+y_pred = pipeline_model.predict(X_test)
 
 cm = confusion_matrix(y_test, y_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
@@ -95,16 +98,3 @@ dummy = DummyClassifier(strategy='stratified')
 dummy.fit(X_train, y_train)
 dummy_pred = dummy.predict(X_test)
 print(f'Recall: {recall_score(y_test, dummy_pred):.2f}')
-
-# Optional: Hyperparameter tuning with GridSearchCV (worse results in this case)
-# param_grid = {
-#     'n_estimators': [100, 200],
-#     'max_depth': [10, 15, 20]
-# }
-# grid_search = GridSearchCV(RandomForestClassifier(random_state=42), param_grid, cv=5)
-# grid_search.fit(X_train, y_train)
-# print("Best parameters:", grid_search.best_params_)
-# y_pred_grid = grid_search.predict(X_test)
-# print(f'Tuned Accuracy: {accuracy_score(y_test, y_pred_grid):.4f}')
-# print(f'Tuned F1 Score: {f1_score(y_test, y_pred_grid):.4f}')
-
