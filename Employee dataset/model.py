@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logging.info("Pipeline started.")
 
 # Load dataset
-df = pd.read_csv('Employee.csv')
+df = pd.read_csv('Employee.csv', encoding='utf-8')
 logging.info("Dataset loaded successfully.")
 
 # Drop duplicates
