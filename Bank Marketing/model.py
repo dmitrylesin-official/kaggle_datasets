@@ -15,6 +15,8 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 
 import logging
 
+import joblib
+
 logging.basicConfig(
     level=logging.INFO,
     filename='log.txt',
@@ -80,3 +82,5 @@ y_pred_proba = model.predict_proba(test_pool)[:, 1]
 # Evaluation (Recall is the focus)
 print("Recall:", recall_score(y_test, y_pred))
 logging.info(f'Model evaluation complete. Recall: {recall:.4f}')
+
+joblib.dump(model, 'model.pkl')
