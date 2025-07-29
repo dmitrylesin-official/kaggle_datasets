@@ -12,6 +12,8 @@ import seaborn as sns
 
 import logging
 
+import joblib
+
 logging.basicConfig(
     level=logging.INFO,
     filename='log.txt',
@@ -78,12 +80,12 @@ logging.info('Split into train and test. Train size: %d, Test size: %d', len(X_t
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
 model = RandomForestClassifier(max_depth=15, n_estimators=100, random_state=42)
-pipeline_model = Pipeline([
+model_pipeline = Pipeline([
     ('model', RandomForestClassifier(max_depth=15, n_estimators=100, random_state=42))
 ])
-pipeline_model.fit(X_train, y_train)
+model_pipeline.fit(X_train, y_train)
 
-y_pred = pipeline_model.predict(X_test)
+y_pred = model_pipeline.predict(X_test)
 
 cm = confusion_matrix(y_test, y_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
@@ -98,3 +100,5 @@ dummy = DummyClassifier(strategy='stratified')
 dummy.fit(X_train, y_train)
 dummy_pred = dummy.predict(X_test)
 print(f'Recall: {recall_score(y_test, dummy_pred):.2f}')
+
+joblib.dump(model_pipeline, 'model.pkl')
