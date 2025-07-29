@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
+import joblib
+
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.info("Pipeline started.")
@@ -97,3 +99,5 @@ logging.info(f"Test Accuracy: {accuracy:.2f}")
 # Output best parameters
 logging.info("Best parameters:")
 logging.info(grid_search.best_params_)
+
+joblib.dump(grid_search, 'model.pkl')
