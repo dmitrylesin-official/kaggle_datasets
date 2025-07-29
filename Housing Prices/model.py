@@ -15,6 +15,8 @@ from sklearn.metrics import mean_absolute_error, r2_score
 
 import logging
 
+import joblib
+
 logging.basicConfig(
     level=logging.INFO,
     filename='log.txt',
@@ -104,3 +106,5 @@ print(f'R² Score on test set: {r2_score(y_test, y_pred)}')
 sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
 plt.title('Correlation with Price')
 plt.show()
+
+joblib.dump(best_model, 'model.pkl')
