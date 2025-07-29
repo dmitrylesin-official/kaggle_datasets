@@ -91,8 +91,10 @@ grid_search = GridSearchCV(
 grid_search.fit(X_train, y_train)
 logging.info("Model training completed.")
 
+best_model = grid.best_estimator_
+
 # Predict on test data
-y_pred = grid_search.predict(X_test)
+y_pred = best_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 logging.info(f"Test Accuracy: {accuracy:.2f}")
 
@@ -100,4 +102,4 @@ logging.info(f"Test Accuracy: {accuracy:.2f}")
 logging.info("Best parameters:")
 logging.info(grid_search.best_params_)
 
-joblib.dump(grid_search, 'model.pkl')
+joblib.dump(best_model, 'model.pkl')
