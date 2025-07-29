@@ -20,6 +20,8 @@ import seaborn as sns
 
 import logging
 
+import joblib
+
 # Configure logging to file
 logging.basicConfig(
     level=logging.INFO,
@@ -89,3 +91,5 @@ print(f'Recall: {recall_score(y_test, y_pred)}')
 # Plot top important features
 plot_importance(model, max_num_features=20, importance_type='gain')
 plt.show()
+
+joblib.dump(model, 'model.pkl')
