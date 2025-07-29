@@ -12,6 +12,8 @@ from collections import Counter
 
 import logging
 
+import joblib
+
 logging.basicConfig(
   level=logging.INFO,
   filename='log.txt',
