@@ -6,6 +6,7 @@
 # !pip install pandas scikit-learn
 
 import pandas as pd
+import numpy as np
 
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import GradientBoostingRegressor
@@ -14,6 +15,8 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 
 import logging
+
+import joblib
 
 logging.basicConfig(
     level=logging.INFO,
@@ -65,11 +68,16 @@ grid_search = GridSearchCV(
 # Fit the pipeline to the training data
 grid_search.fit(X_train, y_train)
 
+best_model = grid_search.best_estimator_
+
 # Make predictions on the test set
-y_pred = grid_search.predict(X_test)
+y_pred = best_model.predict(X_test)
 
 # Print best hyperparameters and evaluation metrics
 print('Best params:', grid_search.best_params_)
 print('Best R2 (CV):', grid_search.best_score_)
 print(f'MSE: {mean_squared_error(y_test, y_pred)}')
 print(f'MAE: {mean_absolute_error(y_test, y_pred)}')
+print(f'RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)}')
+
+joblib.dump(best_model, 'model.pkl')
