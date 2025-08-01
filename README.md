@@ -22,7 +22,7 @@ Each analysis is organized in a single folder, containing:
 
 ## 🧰 Tools & Technologies
 
-- **Python** 🐍  
+- **Python** 
 - **Google Colab** – cloud-based analysis environment  
 - **Pandas** – data manipulation  
 - **NumPy** – numerical computing  
@@ -35,9 +35,9 @@ Each analysis is organized in a single folder, containing:
 ## 🎯 Goals
 
 This project is intended to:
-- Strengthen my data analysis and ML skills 🧠  
-- Serve as a personal portfolio 🗂️  
-- Help others learn from real examples 🎓
+- Strengthen my data analysis and ML skills
+- Serve as a personal portfolio 
+- Help others learn from real examples
 
 ---
 
