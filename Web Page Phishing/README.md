@@ -34,7 +34,7 @@ df.isnull().sum()
 ## 📊 Data Visualization
 Target Distribution:
 ```python
-df['phishing'].hist()
+df['phishing'].hist();
 ```
 ![image](https://github.com/user-attachments/assets/287457ee-d091-43c2-99c6-da77954dc02b)
 
