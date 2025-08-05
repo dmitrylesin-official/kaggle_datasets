@@ -40,7 +40,7 @@ df.head()
 df.isnull().sum()
 
 # Plot class distribution
-df['phishing'].hist()
+df['phishing'].hist();
 
 # Plot correlation heatmap
 plt.subplots(figsize=(10, 7))
