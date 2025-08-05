@@ -85,7 +85,7 @@ df = df[df['price'] <= df['price'].quantile(0.99)]
 ### Correlation Matrix
 A heatmap was used to show correlation between numerical features:
 ```python
-sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
+sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm');
 ```
 
 ---
