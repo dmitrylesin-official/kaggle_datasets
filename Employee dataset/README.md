@@ -1,6 +1,6 @@
 # 🧑‍💼 Employee Attrition Prediction
 ## 📥 Dataset
-This project uses an internal HR dataset from a CSV file: Employee.csv, which includes various employee attributes like:
+This project uses an internal HR dataset from a CSV file: **Employee.csv**, which includes various employee attributes like:
 
 • Education level, joining year, city, gender
 • Salary tier and age
