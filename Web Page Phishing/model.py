@@ -7,19 +7,13 @@
 
 import pandas as pd
 import numpy as np
-
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import recall_score
-
 from xgboost import XGBClassifier, plot_importance
-
 from collections import Counter
-
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 import logging
-
 import joblib
 
 # Configure logging to file
@@ -54,7 +48,7 @@ y = df['phishing']
 
 # Split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, stratify=y, random_state=42
+    X, y, test_size=0.2, stratify=y, random_state=42
 )
 
 # Handle class imbalance
