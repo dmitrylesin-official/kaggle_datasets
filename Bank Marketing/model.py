@@ -25,7 +25,7 @@ logging.basicConfig(
 )
 
 logging.info('Dataset loaded successfully. Rows: %d, Columns: %d', df.shape[0], df.shape[1])
-df = pd.read_csv('bank-additional-full.csv', sep=';', encofing='utf-8')
+df = pd.read_csv('bank-additional-full.csv', sep=';', encoding='utf-8')
 
 df.head()
 df.info()
