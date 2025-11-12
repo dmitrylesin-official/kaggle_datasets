@@ -29,6 +29,7 @@ logging.info('Dataset loaded successfully.')
 df = pd.read_csv('advertising.csv', encoding='utf-8')
 
 df.head()
+df.describe().T
 df.info()
 df.isnull().sum()
 df.duplicated().sum()
