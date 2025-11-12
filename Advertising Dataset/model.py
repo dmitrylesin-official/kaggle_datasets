@@ -78,6 +78,6 @@ print('Best params:', grid_search.best_params_)
 print('Best R2 (CV):', grid_search.best_score_)
 print(f'MSE: {mean_squared_error(y_test, y_pred)}')
 print(f'MAE: {mean_absolute_error(y_test, y_pred)}')
-print(f'RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)}')
+print(f'RMSE: {np.sqrt(mean_squared_error(y_test, y_pred))}')
 
 joblib.dump(best_model, 'model.pkl')
